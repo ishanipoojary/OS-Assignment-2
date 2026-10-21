@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dining Philosophers Simulation</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 24px;
+    background: #f3f6fa;
+    color: #172033;
+}
+h1, h2 { text-align: center; }
+.summary {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.table {
+    position: relative;
+    width: 340px;
+    height: 340px;
+    max-width: 90vw;
+    max-height: 90vw;
+    margin: 20px auto;
+    border: 7px solid #a6b7c9;
+    border-radius: 50%;
+    background: #e4edf5;
+}
+.philosopher {
+    position: absolute;
+    width: 112px;
+    padding: 10px 4px;
+    border-radius: 12px;
+    background: white;
+    text-align: center;
+    box-shadow: 0 2px 7px #0002;
+    font-size: 13px;
+    transform: translate(-50%, -50%);
+}
+.p0 { left: 50%; top: 7%; }
+.p1 { left: 93%; top: 50%; }
+.p2 { left: 50%; top: 93%; }
+.p3 { left: 7%; top: 50%; }
+
+.fork {
+    position: absolute;
+    width: 78px;
+    padding: 8px 2px;
+    border-radius: 8px;
+    background: #fff0c2;
+    text-align: center;
+    font-size: 12px;
+    transform: translate(-50%, -50%);
+    border: 1px solid #d8b55d;
+}
+.f0 { left: 76%; top: 22%; }
+.f1 { left: 76%; top: 78%; }
+.f2 { left: 24%; top: 78%; }
+.f3 { left: 24%; top: 22%; }
+
+.panel {
+    max-width: 850px;
+    margin: 20px auto;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #0001;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px;
+}
+button { padding: 9px 16px; cursor: pointer; }
+input { width: 100%; }
+#eventList {
+    max-height: 250px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 12px;
+}
+.event {
+    padding: 7px;
+    border-bottom: 1px solid #e5e7eb;
+}
+.current { background: #e6f4ea; }
+.note { color: #536175; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<h1>Dining Philosophers</h1>
+<div class="summary">
+    Semaphore-based synchronization · 4 philosophers · 4 chopsticks
+</div>
+
+<div class="table">
+    <div class="philosopher p0" id="p0"></div>
+    <div class="philosopher p1" id="p1"></div>
+    <div class="philosopher p2" id="p2"></div>
+    <div class="philosopher p3" id="p3"></div>
+
+    <div class="fork f0" id="f0"></div>
+    <div class="fork f1" id="f1"></div>
+    <div class="fork f2" id="f2"></div>
+    <div class="fork f3" id="f3"></div>
+</div>
+
+<div class="panel">
+    <h2>Execution replay</h2>
+    <div id="counter"></div>
+    <input id="timeline" type="range" min="0" value="0" step="1">
+    <div class="controls">
+        <button id="prev">Previous</button>
+        <button id="play">Play</button>
+        <button id="next">Next</button>
+        <button id="reset">Reset</button>
+    </div>
+    <p id="currentEvent"></p>
+    <p class="note">
+        Each step represents a snapshot recorded by the actual Python run.
+        Playback follows the recorded event order.
+    </p>
+</div>
+
+<div class="panel">
+    <h2>Execution event log</h2>
+    <div id="eventList"></div>
+</div>
+
+<script>
+const events = [{"time": 0.0003, "philosopher": 0, "action": "Thinking", "detail": "Round 1", "states": ["Thinking", "Thinking", "Thinking", "Thinking"], "chopstick_owners": [null, null, null, null]}, {"time": 0.0005, "philosopher": 1, "action": "Thinking", "detail": "Round 1", "states": ["Thinking", "Thinking", "Thinking", "Thinking"], "chopstick_owners": [null, null, null, null]}, {"time": 0.0007, "philosopher": 2, "action": "Thinking", "detail": "Round 1", "states": ["Thinking", "Thinking", "Thinking", "Thinking"], "chopstick_owners": [null, null, null, null]}, {"time": 0.001, "philosopher": 3, "action": "Thinking", "detail": "Round 1", "states": ["Thinking", "Thinking", "Thinking", "Thinking"], "chopstick_owners": [null, null, null, null]}, {"time": 0.158, "philosopher": 0, "action": "Hungry", "detail": "Round 1", "states": ["Hungry", "Thinking", "Thinking", "Thinking"], "chopstick_owners": [null, null, null, null]}, {"time": 0.1581, "philosopher": 0, "action": "Entered room", "detail": "Permit acquired", "states": ["Waiting for chopsticks", "Thinking", "Thinking", "Thinking"], "chopstick_owners": [null, null, null, null]}, {"time": 0.1581, "philosopher": 0, "action": "Acquired chopstick", "detail": "C0", "states": ["Acquiring chopsticks", "Thinking", "Thinking", "Thinking"], "chopstick_owners": [0, null, null, null]}, {"time": 0.1581, "philosopher": 0, "action": "Acquired chopstick", "detail": "C1", "states": ["Acquiring chopsticks", "Thinking", "Thinking", "Thinking"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.1581, "philosopher": 0, "action": "Eating", "detail": "Round 1", "states": ["Eating", "Thinking", "Thinking", "Thinking"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.2556, "philosopher": 2, "action": "Hungry", "detail": "Round 1", "states": ["Eating", "Thinking", "Hungry", "Thinking"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.2556, "philosopher": 2, "action": "Entered room", "detail": "Permit acquired", "states": ["Eating", "Thinking", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.2556, "philosopher": 2, "action": "Acquired chopstick", "detail": "C2", "states": ["Eating", "Thinking", "Acquiring chopsticks", "Thinking"], "chopstick_owners": [0, 0, 2, null]}, {"time": 0.2556, "philosopher": 2, "action": "Acquired chopstick", "detail": "C3", "states": ["Eating", "Thinking", "Acquiring chopsticks", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 0.2556, "philosopher": 2, "action": "Eating", "detail": "Round 1", "states": ["Eating", "Thinking", "Eating", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 0.2884, "philosopher": 1, "action": "Hungry", "detail": "Round 1", "states": ["Eating", "Hungry", "Eating", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 0.2884, "philosopher": 1, "action": "Entered room", "detail": "Permit acquired", "states": ["Eating", "Waiting for chopsticks", "Eating", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 0.2958, "philosopher": 3, "action": "Hungry", "detail": "Round 1", "states": ["Eating", "Waiting for chopsticks", "Eating", "Hungry"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 0.5668, "philosopher": 2, "action": "Released chopstick", "detail": "C3", "states": ["Eating", "Waiting for chopsticks", "Eating", "Hungry"], "chopstick_owners": [0, 0, 2, null]}, {"time": 0.5669, "philosopher": 2, "action": "Released chopstick", "detail": "C2", "states": ["Eating", "Waiting for chopsticks", "Eating", "Hungry"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.5669, "philosopher": 2, "action": "Finished round", "detail": "1", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Hungry"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.5669, "philosopher": 2, "action": "Thinking", "detail": "Round 2", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Hungry"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.5669, "philosopher": 3, "action": "Entered room", "detail": "Permit acquired", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Waiting for chopsticks"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.5669, "philosopher": 3, "action": "Acquired chopstick", "detail": "C3", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [0, 0, null, 3]}, {"time": 0.6149, "philosopher": 0, "action": "Released chopstick", "detail": "C1", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [0, null, null, 3]}, {"time": 0.6149, "philosopher": 0, "action": "Released chopstick", "detail": "C0", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, null, null, 3]}, {"time": 0.6149, "philosopher": 0, "action": "Finished round", "detail": "1", "states": ["Thinking", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, null, null, 3]}, {"time": 0.6149, "philosopher": 0, "action": "Thinking", "detail": "Round 2", "states": ["Thinking", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, null, null, 3]}, {"time": 0.615, "philosopher": 1, "action": "Acquired chopstick", "detail": "C1", "states": ["Thinking", "Acquiring chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, 1, null, 3]}, {"time": 0.615, "philosopher": 1, "action": "Acquired chopstick", "detail": "C2", "states": ["Thinking", "Acquiring chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, 1, 1, 3]}, {"time": 0.615, "philosopher": 1, "action": "Eating", "detail": "Round 1", "states": ["Thinking", "Eating", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, 1, 1, 3]}, {"time": 0.615, "philosopher": 3, "action": "Acquired chopstick", "detail": "C0", "states": ["Thinking", "Eating", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 0.615, "philosopher": 3, "action": "Eating", "detail": "Round 1", "states": ["Thinking", "Eating", "Thinking", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 0.7633, "philosopher": 2, "action": "Hungry", "detail": "Round 2", "states": ["Thinking", "Eating", "Hungry", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 0.7633, "philosopher": 2, "action": "Entered room", "detail": "Permit acquired", "states": ["Thinking", "Eating", "Waiting for chopsticks", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 0.801, "philosopher": 0, "action": "Hungry", "detail": "Round 2", "states": ["Hungry", "Eating", "Waiting for chopsticks", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 0.8223, "philosopher": 3, "action": "Released chopstick", "detail": "C0", "states": ["Hungry", "Eating", "Waiting for chopsticks", "Eating"], "chopstick_owners": [null, 1, 1, 3]}, {"time": 0.8223, "philosopher": 3, "action": "Released chopstick", "detail": "C3", "states": ["Hungry", "Eating", "Waiting for chopsticks", "Eating"], "chopstick_owners": [null, 1, 1, null]}, {"time": 0.8223, "philosopher": 3, "action": "Finished round", "detail": "1", "states": ["Hungry", "Eating", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [null, 1, 1, null]}, {"time": 0.8224, "philosopher": 3, "action": "Thinking", "detail": "Round 2", "states": ["Hungry", "Eating", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [null, 1, 1, null]}, {"time": 0.8224, "philosopher": 0, "action": "Entered room", "detail": "Permit acquired", "states": ["Waiting for chopsticks", "Eating", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [null, 1, 1, null]}, {"time": 0.8224, "philosopher": 0, "action": "Acquired chopstick", "detail": "C0", "states": ["Acquiring chopsticks", "Eating", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, 1, 1, null]}, {"time": 0.905, "philosopher": 1, "action": "Released chopstick", "detail": "C2", "states": ["Acquiring chopsticks", "Eating", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, 1, null, null]}, {"time": 0.9051, "philosopher": 1, "action": "Released chopstick", "detail": "C1", "states": ["Acquiring chopsticks", "Eating", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, null, null, null]}, {"time": 0.9051, "philosopher": 1, "action": "Finished round", "detail": "1", "states": ["Acquiring chopsticks", "Thinking", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, null, null, null]}, {"time": 0.9051, "philosopher": 1, "action": "Thinking", "detail": "Round 2", "states": ["Acquiring chopsticks", "Thinking", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, null, null, null]}, {"time": 0.9053, "philosopher": 0, "action": "Acquired chopstick", "detail": "C1", "states": ["Acquiring chopsticks", "Thinking", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.9053, "philosopher": 0, "action": "Eating", "detail": "Round 2", "states": ["Eating", "Thinking", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, 0, null, null]}, {"time": 0.9053, "philosopher": 2, "action": "Acquired chopstick", "detail": "C2", "states": ["Eating", "Thinking", "Acquiring chopsticks", "Thinking"], "chopstick_owners": [0, 0, 2, null]}, {"time": 0.9054, "philosopher": 2, "action": "Acquired chopstick", "detail": "C3", "states": ["Eating", "Thinking", "Acquiring chopsticks", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 0.9054, "philosopher": 2, "action": "Eating", "detail": "Round 2", "states": ["Eating", "Thinking", "Eating", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 1.0787, "philosopher": 1, "action": "Hungry", "detail": "Round 2", "states": ["Eating", "Hungry", "Eating", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 1.0787, "philosopher": 1, "action": "Entered room", "detail": "Permit acquired", "states": ["Eating", "Waiting for chopsticks", "Eating", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 1.0998, "philosopher": 3, "action": "Hungry", "detail": "Round 2", "states": ["Eating", "Waiting for chopsticks", "Eating", "Hungry"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 1.2843, "philosopher": 2, "action": "Released chopstick", "detail": "C3", "states": ["Eating", "Waiting for chopsticks", "Eating", "Hungry"], "chopstick_owners": [0, 0, 2, null]}, {"time": 1.2843, "philosopher": 2, "action": "Released chopstick", "detail": "C2", "states": ["Eating", "Waiting for chopsticks", "Eating", "Hungry"], "chopstick_owners": [0, 0, null, null]}, {"time": 1.2843, "philosopher": 2, "action": "Finished round", "detail": "2", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Hungry"], "chopstick_owners": [0, 0, null, null]}, {"time": 1.2843, "philosopher": 2, "action": "Thinking", "detail": "Round 3", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Hungry"], "chopstick_owners": [0, 0, null, null]}, {"time": 1.2844, "philosopher": 3, "action": "Entered room", "detail": "Permit acquired", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Waiting for chopsticks"], "chopstick_owners": [0, 0, null, null]}, {"time": 1.2844, "philosopher": 3, "action": "Acquired chopstick", "detail": "C3", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [0, 0, null, 3]}, {"time": 1.3375, "philosopher": 0, "action": "Released chopstick", "detail": "C1", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [0, null, null, 3]}, {"time": 1.3375, "philosopher": 0, "action": "Released chopstick", "detail": "C0", "states": ["Eating", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, null, null, 3]}, {"time": 1.3375, "philosopher": 0, "action": "Finished round", "detail": "2", "states": ["Thinking", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, null, null, 3]}, {"time": 1.3375, "philosopher": 0, "action": "Thinking", "detail": "Round 3", "states": ["Thinking", "Waiting for chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, null, null, 3]}, {"time": 1.3376, "philosopher": 1, "action": "Acquired chopstick", "detail": "C1", "states": ["Thinking", "Acquiring chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, 1, null, 3]}, {"time": 1.3376, "philosopher": 1, "action": "Acquired chopstick", "detail": "C2", "states": ["Thinking", "Acquiring chopsticks", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, 1, 1, 3]}, {"time": 1.3376, "philosopher": 1, "action": "Eating", "detail": "Round 2", "states": ["Thinking", "Eating", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [null, 1, 1, 3]}, {"time": 1.3376, "philosopher": 3, "action": "Acquired chopstick", "detail": "C0", "states": ["Thinking", "Eating", "Thinking", "Acquiring chopsticks"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 1.3377, "philosopher": 3, "action": "Eating", "detail": "Round 2", "states": ["Thinking", "Eating", "Thinking", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 1.4664, "philosopher": 0, "action": "Hungry", "detail": "Round 3", "states": ["Hungry", "Eating", "Thinking", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 1.4664, "philosopher": 0, "action": "Entered room", "detail": "Permit acquired", "states": ["Waiting for chopsticks", "Eating", "Thinking", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 1.4941, "philosopher": 2, "action": "Hungry", "detail": "Round 3", "states": ["Waiting for chopsticks", "Eating", "Hungry", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 1.5926, "philosopher": 3, "action": "Released chopstick", "detail": "C0", "states": ["Waiting for chopsticks", "Eating", "Hungry", "Eating"], "chopstick_owners": [null, 1, 1, 3]}, {"time": 1.5926, "philosopher": 3, "action": "Released chopstick", "detail": "C3", "states": ["Waiting for chopsticks", "Eating", "Hungry", "Eating"], "chopstick_owners": [null, 1, 1, null]}, {"time": 1.5926, "philosopher": 3, "action": "Finished round", "detail": "2", "states": ["Waiting for chopsticks", "Eating", "Hungry", "Thinking"], "chopstick_owners": [null, 1, 1, null]}, {"time": 1.5926, "philosopher": 3, "action": "Thinking", "detail": "Round 3", "states": ["Waiting for chopsticks", "Eating", "Hungry", "Thinking"], "chopstick_owners": [null, 1, 1, null]}, {"time": 1.5927, "philosopher": 0, "action": "Acquired chopstick", "detail": "C0", "states": ["Acquiring chopsticks", "Eating", "Hungry", "Thinking"], "chopstick_owners": [0, 1, 1, null]}, {"time": 1.5927, "philosopher": 2, "action": "Entered room", "detail": "Permit acquired", "states": ["Acquiring chopsticks", "Eating", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, 1, 1, null]}, {"time": 1.6502, "philosopher": 1, "action": "Released chopstick", "detail": "C2", "states": ["Acquiring chopsticks", "Eating", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, 1, null, null]}, {"time": 1.6503, "philosopher": 1, "action": "Released chopstick", "detail": "C1", "states": ["Acquiring chopsticks", "Eating", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, null, null, null]}, {"time": 1.6503, "philosopher": 1, "action": "Finished round", "detail": "2", "states": ["Acquiring chopsticks", "Thinking", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, null, null, null]}, {"time": 1.6503, "philosopher": 1, "action": "Thinking", "detail": "Round 3", "states": ["Acquiring chopsticks", "Thinking", "Waiting for chopsticks", "Thinking"], "chopstick_owners": [0, null, null, null]}, {"time": 1.6503, "philosopher": 2, "action": "Acquired chopstick", "detail": "C2", "states": ["Acquiring chopsticks", "Thinking", "Acquiring chopsticks", "Thinking"], "chopstick_owners": [0, null, 2, null]}, {"time": 1.6504, "philosopher": 2, "action": "Acquired chopstick", "detail": "C3", "states": ["Acquiring chopsticks", "Thinking", "Acquiring chopsticks", "Thinking"], "chopstick_owners": [0, null, 2, 2]}, {"time": 1.6504, "philosopher": 2, "action": "Eating", "detail": "Round 3", "states": ["Acquiring chopsticks", "Thinking", "Eating", "Thinking"], "chopstick_owners": [0, null, 2, 2]}, {"time": 1.6504, "philosopher": 0, "action": "Acquired chopstick", "detail": "C1", "states": ["Acquiring chopsticks", "Thinking", "Eating", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 1.6504, "philosopher": 0, "action": "Eating", "detail": "Round 3", "states": ["Eating", "Thinking", "Eating", "Thinking"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 1.8662, "philosopher": 3, "action": "Hungry", "detail": "Round 3", "states": ["Eating", "Thinking", "Eating", "Hungry"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 1.8662, "philosopher": 3, "action": "Entered room", "detail": "Permit acquired", "states": ["Eating", "Thinking", "Eating", "Waiting for chopsticks"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 1.8995, "philosopher": 1, "action": "Hungry", "detail": "Round 3", "states": ["Eating", "Hungry", "Eating", "Waiting for chopsticks"], "chopstick_owners": [0, 0, 2, 2]}, {"time": 2.0556, "philosopher": 0, "action": "Released chopstick", "detail": "C1", "states": ["Eating", "Hungry", "Eating", "Waiting for chopsticks"], "chopstick_owners": [0, null, 2, 2]}, {"time": 2.0556, "philosopher": 0, "action": "Released chopstick", "detail": "C0", "states": ["Eating", "Hungry", "Eating", "Waiting for chopsticks"], "chopstick_owners": [null, null, 2, 2]}, {"time": 2.0556, "philosopher": 0, "action": "Finished round", "detail": "3", "states": ["Thinking", "Hungry", "Eating", "Waiting for chopsticks"], "chopstick_owners": [null, null, 2, 2]}, {"time": 2.0556, "philosopher": 0, "action": "Completed", "detail": "All rounds finished", "states": ["Finished", "Hungry", "Eating", "Waiting for chopsticks"], "chopstick_owners": [null, null, 2, 2]}, {"time": 2.0557, "philosopher": 1, "action": "Entered room", "detail": "Permit acquired", "states": ["Finished", "Waiting for chopsticks", "Eating", "Waiting for chopsticks"], "chopstick_owners": [null, null, 2, 2]}, {"time": 2.0557, "philosopher": 1, "action": "Acquired chopstick", "detail": "C1", "states": ["Finished", "Acquiring chopsticks", "Eating", "Waiting for chopsticks"], "chopstick_owners": [null, 1, 2, 2]}, {"time": 2.061, "philosopher": 2, "action": "Released chopstick", "detail": "C3", "states": ["Finished", "Acquiring chopsticks", "Eating", "Waiting for chopsticks"], "chopstick_owners": [null, 1, 2, null]}, {"time": 2.0612, "philosopher": 2, "action": "Released chopstick", "detail": "C2", "states": ["Finished", "Acquiring chopsticks", "Eating", "Waiting for chopsticks"], "chopstick_owners": [null, 1, null, null]}, {"time": 2.0612, "philosopher": 2, "action": "Finished round", "detail": "3", "states": ["Finished", "Acquiring chopsticks", "Thinking", "Waiting for chopsticks"], "chopstick_owners": [null, 1, null, null]}, {"time": 2.0612, "philosopher": 2, "action": "Completed", "detail": "All rounds finished", "states": ["Finished", "Acquiring chopsticks", "Finished", "Waiting for chopsticks"], "chopstick_owners": [null, 1, null, null]}, {"time": 2.0613, "philosopher": 3, "action": "Acquired chopstick", "detail": "C3", "states": ["Finished", "Acquiring chopsticks", "Finished", "Acquiring chopsticks"], "chopstick_owners": [null, 1, null, 3]}, {"time": 2.0613, "philosopher": 3, "action": "Acquired chopstick", "detail": "C0", "states": ["Finished", "Acquiring chopsticks", "Finished", "Acquiring chopsticks"], "chopstick_owners": [3, 1, null, 3]}, {"time": 2.0613, "philosopher": 3, "action": "Eating", "detail": "Round 3", "states": ["Finished", "Acquiring chopsticks", "Finished", "Eating"], "chopstick_owners": [3, 1, null, 3]}, {"time": 2.0613, "philosopher": 1, "action": "Acquired chopstick", "detail": "C2", "states": ["Finished", "Acquiring chopsticks", "Finished", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 2.0613, "philosopher": 1, "action": "Eating", "detail": "Round 3", "states": ["Finished", "Eating", "Finished", "Eating"], "chopstick_owners": [3, 1, 1, 3]}, {"time": 2.354, "philosopher": 1, "action": "Released chopstick", "detail": "C2", "states": ["Finished", "Eating", "Finished", "Eating"], "chopstick_owners": [3, 1, null, 3]}, {"time": 2.3541, "philosopher": 1, "action": "Released chopstick", "detail": "C1", "states": ["Finished", "Eating", "Finished", "Eating"], "chopstick_owners": [3, null, null, 3]}, {"time": 2.3541, "philosopher": 1, "action": "Finished round", "detail": "3", "states": ["Finished", "Thinking", "Finished", "Eating"], "chopstick_owners": [3, null, null, 3]}, {"time": 2.3541, "philosopher": 1, "action": "Completed", "detail": "All rounds finished", "states": ["Finished", "Finished", "Finished", "Eating"], "chopstick_owners": [3, null, null, 3]}, {"time": 2.5465, "philosopher": 3, "action": "Released chopstick", "detail": "C0", "states": ["Finished", "Finished", "Finished", "Eating"], "chopstick_owners": [null, null, null, 3]}, {"time": 2.5465, "philosopher": 3, "action": "Released chopstick", "detail": "C3", "states": ["Finished", "Finished", "Finished", "Eating"], "chopstick_owners": [null, null, null, null]}, {"time": 2.5465, "philosopher": 3, "action": "Finished round", "detail": "3", "states": ["Finished", "Finished", "Finished", "Thinking"], "chopstick_owners": [null, null, null, null]}, {"time": 2.5465, "philosopher": 3, "action": "Completed", "detail": "All rounds finished", "states": ["Finished", "Finished", "Finished", "Finished"], "chopstick_owners": [null, null, null, null]}];
+let index = 0;
+let timer = null;
+
+const timeline = document.getElementById("timeline");
+timeline.max = events.length - 1;
+
+function render() {
+    const event = events[index];
+    if (!event) return;
+
+    for (let i = 0; i < 4; i++) {
+        const state = event.states[i];
+        const philosopher = document.getElementById("p" + i);
+        philosopher.textContent =
+            "P" + i + " · " + state;
+
+        philosopher.style.background =
+            state === "Eating" ? "#c8f2d0" :
+            state === "Hungry" ||
+            state === "Waiting for chopsticks" ||
+            state === "Acquiring chopsticks" ? "#ffe0bd" :
+            state === "Finished" ? "#dbeafe" : "white";
+
+        const owner = event.chopstick_owners[i];
+        const fork = document.getElementById("f" + i);
+        fork.textContent = owner === null
+            ? "C" + i + " · Free"
+            : "C" + i + " · P" + owner;
+        fork.style.background =
+            owner === null ? "#fff0c2" : "#b8e3fa";
+    }
+
+    timeline.value = index;
+    document.getElementById("counter").textContent =
+        "Event " + (index + 1) + " of " + events.length +
+        " · Time: " + event.time + " seconds";
+
+    document.getElementById("currentEvent").textContent =
+        "P" + event.philosopher + ": " +
+        event.action +
+        (event.detail ? " — " + event.detail : "");
+
+    document.querySelectorAll(".event").forEach((item, i) => {
+        item.classList.toggle("current", i === index);
+    });
+
+    document.querySelector(".event.current")?.scrollIntoView({
+        block: "nearest"
+    });
+}
+
+function stop() {
+    if (timer !== null) {
+        clearInterval(timer);
+        timer = null;
+    }
+    document.getElementById("play").textContent = "Play";
+}
+
+function moveTo(value) {
+    index = Math.max(0, Math.min(events.length - 1, value));
+    render();
+}
+
+function togglePlay() {
+    if (timer !== null) {
+        stop();
+        return;
+    }
+
+    if (index >= events.length - 1) moveTo(0);
+
+    document.getElementById("play").textContent = "Pause";
+    timer = setInterval(() => {
+        if (index >= events.length - 1) {
+            stop();
+            return;
+        }
+        moveTo(index + 1);
+    }, 500);
+}
+
+document.getElementById("prev").onclick = () => {
+    stop();
+    moveTo(index - 1);
+};
+
+document.getElementById("next").onclick = () => {
+    stop();
+    moveTo(index + 1);
+};
+
+document.getElementById("play").onclick = togglePlay;
+
+document.getElementById("reset").onclick = () => {
+    stop();
+    moveTo(0);
+};
+
+timeline.oninput = () => {
+    stop();
+    moveTo(Number(timeline.value));
+};
+
+const list = document.getElementById("eventList");
+events.forEach((event, i) => {
+    const row = document.createElement("div");
+    row.className = "event";
+    row.textContent =
+        "#" + (i + 1) + " [" + event.time + "s] P" +
+        event.philosopher + ": " + event.action +
+        (event.detail ? " — " + event.detail : "");
+
+    row.onclick = () => {
+        stop();
+        moveTo(i);
+    };
+
+    list.appendChild(row);
+});
+
+render();
+</script>
+</body>
+</html>

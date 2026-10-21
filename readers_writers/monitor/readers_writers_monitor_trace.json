@@ -1,0 +1,1350 @@
+[
+  {
+    "time": 0.0005,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 1",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 0,
+    "states": {
+      "R2": "Waiting"
+    }
+  },
+  {
+    "time": 0.0005,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 1",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 0,
+    "states": {
+      "R2": "Reading"
+    }
+  },
+  {
+    "time": 0.0008,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Waiting to write",
+    "detail": "Round 1",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 1,
+    "shared_data": 0,
+    "states": {
+      "R2": "Reading",
+      "W0": "Waiting"
+    }
+  },
+  {
+    "time": 0.0012,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 1",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 1,
+    "shared_data": 0,
+    "states": {
+      "R2": "Reading",
+      "W0": "Waiting",
+      "R0": "Waiting"
+    }
+  },
+  {
+    "time": 0.0016,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 1",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 1,
+    "shared_data": 0,
+    "states": {
+      "R2": "Reading",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting"
+    }
+  },
+  {
+    "time": 0.0018,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Waiting to write",
+    "detail": "Round 1",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 2,
+    "shared_data": 0,
+    "states": {
+      "R2": "Reading",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Waiting"
+    }
+  },
+  {
+    "time": 0.002,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 1",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 2,
+    "shared_data": 0,
+    "states": {
+      "R2": "Reading",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Waiting",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 0.2971,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 0",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 2,
+    "shared_data": 0,
+    "states": {
+      "R2": "Reading",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Waiting",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 0.2971,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 2,
+    "shared_data": 0,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Waiting",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 0.2972,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Writing",
+    "detail": "Changed value from 0 to 1",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 1,
+    "shared_data": 1,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 0.4009,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 2",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 1,
+    "shared_data": 1,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 0.6904,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Writer finished",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 1,
+    "shared_data": 1,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Finished writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 0.6905,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Writing",
+    "detail": "Changed value from 1 to 2",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 0,
+    "shared_data": 2,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Finished writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 0.8878,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Waiting to write",
+    "detail": "Round 2",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 1,
+    "shared_data": 2,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Waiting",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.0272,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Writer finished",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 1,
+    "shared_data": 2,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Finished writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Waiting",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.0273,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Writing",
+    "detail": "Changed value from 2 to 3",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 0,
+    "shared_data": 3,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Finished writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.2165,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Waiting to write",
+    "detail": "Round 2",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 1,
+    "shared_data": 3,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.2899,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Writer finished",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 1,
+    "shared_data": 3,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Finished writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.29,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Writing",
+    "detail": "Changed value from 3 to 4",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 0,
+    "shared_data": 4,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Finished writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.481,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Waiting to write",
+    "detail": "Round 3",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 1,
+    "shared_data": 4,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Waiting",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.6494,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Writer finished",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 1,
+    "shared_data": 4,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Finished writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Waiting",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.6498,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Writing",
+    "detail": "Changed value from 4 to 5",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 0,
+    "shared_data": 5,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Finished writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.8427,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Waiting to write",
+    "detail": "Round 3",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 1,
+    "shared_data": 5,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.9781,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Writer finished",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 1,
+    "shared_data": 5,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Waiting",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Finished writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 1.9782,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Writing",
+    "detail": "Changed value from 5 to 6",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Finished writing",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 2.1059,
+    "actor": "W1",
+    "role": "Writer",
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "active_readers": 0,
+    "active_writer": true,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Completed",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 2.303,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Writer finished",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Finished writing",
+      "R0": "Waiting",
+      "R1": "Waiting",
+      "W1": "Completed",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 2.3031,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 1",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Finished writing",
+      "R0": "Reading",
+      "R1": "Waiting",
+      "W1": "Completed",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 2.3032,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 2",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Finished writing",
+      "R0": "Reading",
+      "R1": "Waiting",
+      "W1": "Completed",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 2.3032,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 1",
+    "active_readers": 3,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Finished writing",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 2.3032,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 1",
+    "active_readers": 4,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Finished writing",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 2.4204,
+    "actor": "W0",
+    "role": "Writer",
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "active_readers": 4,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 2.4298,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 4,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 2.4298,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 3,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.4308,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 3,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.4308,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.4552,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.4552,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.47,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.4701,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.5935,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 2",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Waiting",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.5936,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 2",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.6003,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 3",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Waiting",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.6003,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 3",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.6024,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 2",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Waiting",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.6024,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 2",
+    "active_readers": 3,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.6051,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 2",
+    "active_readers": 3,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 2.6051,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 2",
+    "active_readers": 4,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 2.7278,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 4,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 2.7278,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 3,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 2.7288,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 3,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 2.7288,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 2.8058,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 2.8058,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.8485,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.8486,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Finished reading",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.8563,
+    "actor": "R2",
+    "role": "Reader",
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.9123,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 3",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Waiting",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.9123,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 3",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.9736,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 3",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Waiting",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.9736,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 3",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 2.9774,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Waiting to read",
+    "detail": "Round 3",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Waiting"
+    }
+  },
+  {
+    "time": 2.9775,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Started reading",
+    "detail": "Round 3",
+    "active_readers": 3,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 3.1018,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 3,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 3.1019,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 3.117,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 2,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Reading"
+    }
+  },
+  {
+    "time": 3.117,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 3.2183,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Finished reading",
+    "detail": "Observed value 6",
+    "active_readers": 1,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 3.2183,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Left resource",
+    "detail": "",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Finished reading"
+    }
+  },
+  {
+    "time": 3.2188,
+    "actor": "R3",
+    "role": "Reader",
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Finished reading",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Completed"
+    }
+  },
+  {
+    "time": 3.2633,
+    "actor": "R0",
+    "role": "Reader",
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Completed",
+      "R1": "Finished reading",
+      "W1": "Completed",
+      "R3": "Completed"
+    }
+  },
+  {
+    "time": 3.3766,
+    "actor": "R1",
+    "role": "Reader",
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "active_readers": 0,
+    "active_writer": false,
+    "waiting_writers": 0,
+    "shared_data": 6,
+    "states": {
+      "R2": "Completed",
+      "W0": "Completed",
+      "R0": "Completed",
+      "R1": "Completed",
+      "W1": "Completed",
+      "R3": "Completed"
+    }
+  }
+]

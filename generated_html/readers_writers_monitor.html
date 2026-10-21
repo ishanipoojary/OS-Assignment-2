@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Readers-Writers Monitor Simulation</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 24px;
+    background: #f3f5f9;
+    color: #202536;
+}
+main { max-width: 1100px; margin: auto; }
+.panel {
+    background: white;
+    padding: 18px;
+    margin: 16px 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #00000012;
+}
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+.stat { background: #eef2ff; padding: 14px; border-radius: 8px; }
+.stat strong { display: block; font-size: 25px; margin-top: 6px; }
+button, select {
+    padding: 9px 13px;
+    margin: 4px;
+    cursor: pointer;
+}
+#status { font-weight: bold; }
+.track {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+}
+.track-label { width: 65px; font-weight: bold; }
+.bar {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    background: #e8eaf0;
+    min-height: 20px;
+}
+.reading { background: #c9f2dd; }
+.writing { background: #ffd7ad; }
+.waiting { background: #fff0ad; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 9px; border-bottom: 1px solid #e4e7ed; text-align: left; }
+.timeline { max-height: 420px; overflow: auto; }
+small { color: #5c6375; }
+</style>
+</head>
+<body>
+<main>
+<h1>Readers-Writers Problem</h1>
+<p>Monitor-based synchronization replay generated from the recorded Python thread execution.</p>
+
+<section class="panel stats">
+  <div class="stat">Readers<strong>4</strong></div>
+  <div class="stat">Writers<strong>2</strong></div>
+  <div class="stat">Events<strong id="total">0</strong></div>
+  <div class="stat">Shared value<strong id="value">0</strong></div>
+</section>
+
+<section class="panel">
+<h2>Simulation controls</h2>
+<button onclick="play()">Play</button>
+<button onclick="pause()">Pause</button>
+<button onclick="previous()">Previous</button>
+<button onclick="next()">Next</button>
+<label>Speed
+<select id="speed">
+<option value="1200">Slow</option>
+<option value="600" selected>Normal</option>
+<option value="200">Fast</option>
+</select>
+</label>
+<p id="status">Ready</p>
+<input id="seek" type="range" min="0" max="0" value="0" style="width:100%">
+<p id="counter"></p>
+</section>
+
+<section class="panel">
+<h2>Current resource state</h2>
+<p>Active readers: <strong id="readers">0</strong></p>
+<p>Writer active: <strong id="writer">No</strong></p>
+<p>Writers waiting: <strong id="waiting">0</strong></p>
+<div id="tracks"></div>
+<p><small>Readers may share the resource. A writer requires exclusive access.</small></p>
+</section>
+
+<section class="panel">
+<h2>Current event</h2>
+<p><strong id="actor">—</strong>: <span id="action">—</span></p>
+<p id="detail"></p>
+</section>
+
+<section class="panel timeline">
+<h2>Execution timeline</h2>
+<table>
+<thead><tr><th>#</th><th>Thread</th><th>Action</th><th>Readers</th><th>Writer</th><th>Shared value</th></tr></thead>
+<tbody id="log"></tbody>
+</table>
+</section>
+</main>
+
+<script>
+const events = [{"time": 0.0005, "actor": "R2", "role": "Reader", "action": "Waiting to read", "detail": "Round 1", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 0, "states": {"R2": "Waiting"}}, {"time": 0.0005, "actor": "R2", "role": "Reader", "action": "Started reading", "detail": "Round 1", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 0, "states": {"R2": "Reading"}}, {"time": 0.0008, "actor": "W0", "role": "Writer", "action": "Waiting to write", "detail": "Round 1", "active_readers": 1, "active_writer": false, "waiting_writers": 1, "shared_data": 0, "states": {"R2": "Reading", "W0": "Waiting"}}, {"time": 0.0012, "actor": "R0", "role": "Reader", "action": "Waiting to read", "detail": "Round 1", "active_readers": 1, "active_writer": false, "waiting_writers": 1, "shared_data": 0, "states": {"R2": "Reading", "W0": "Waiting", "R0": "Waiting"}}, {"time": 0.0016, "actor": "R1", "role": "Reader", "action": "Waiting to read", "detail": "Round 1", "active_readers": 1, "active_writer": false, "waiting_writers": 1, "shared_data": 0, "states": {"R2": "Reading", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting"}}, {"time": 0.0018, "actor": "W1", "role": "Writer", "action": "Waiting to write", "detail": "Round 1", "active_readers": 1, "active_writer": false, "waiting_writers": 2, "shared_data": 0, "states": {"R2": "Reading", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Waiting"}}, {"time": 0.002, "actor": "R3", "role": "Reader", "action": "Waiting to read", "detail": "Round 1", "active_readers": 1, "active_writer": false, "waiting_writers": 2, "shared_data": 0, "states": {"R2": "Reading", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Waiting", "R3": "Waiting"}}, {"time": 0.2971, "actor": "R2", "role": "Reader", "action": "Finished reading", "detail": "Observed value 0", "active_readers": 1, "active_writer": false, "waiting_writers": 2, "shared_data": 0, "states": {"R2": "Reading", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Waiting", "R3": "Waiting"}}, {"time": 0.2971, "actor": "R2", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 2, "shared_data": 0, "states": {"R2": "Finished reading", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Waiting", "R3": "Waiting"}}, {"time": 0.2972, "actor": "W1", "role": "Writer", "action": "Writing", "detail": "Changed value from 0 to 1", "active_readers": 0, "active_writer": true, "waiting_writers": 1, "shared_data": 1, "states": {"R2": "Finished reading", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Writing", "R3": "Waiting"}}, {"time": 0.4009, "actor": "R2", "role": "Reader", "action": "Waiting to read", "detail": "Round 2", "active_readers": 0, "active_writer": true, "waiting_writers": 1, "shared_data": 1, "states": {"R2": "Waiting", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Writing", "R3": "Waiting"}}, {"time": 0.6904, "actor": "W1", "role": "Writer", "action": "Writer finished", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 1, "shared_data": 1, "states": {"R2": "Waiting", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Finished writing", "R3": "Waiting"}}, {"time": 0.6905, "actor": "W0", "role": "Writer", "action": "Writing", "detail": "Changed value from 1 to 2", "active_readers": 0, "active_writer": true, "waiting_writers": 0, "shared_data": 2, "states": {"R2": "Waiting", "W0": "Writing", "R0": "Waiting", "R1": "Waiting", "W1": "Finished writing", "R3": "Waiting"}}, {"time": 0.8878, "actor": "W1", "role": "Writer", "action": "Waiting to write", "detail": "Round 2", "active_readers": 0, "active_writer": true, "waiting_writers": 1, "shared_data": 2, "states": {"R2": "Waiting", "W0": "Writing", "R0": "Waiting", "R1": "Waiting", "W1": "Waiting", "R3": "Waiting"}}, {"time": 1.0272, "actor": "W0", "role": "Writer", "action": "Writer finished", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 1, "shared_data": 2, "states": {"R2": "Waiting", "W0": "Finished writing", "R0": "Waiting", "R1": "Waiting", "W1": "Waiting", "R3": "Waiting"}}, {"time": 1.0273, "actor": "W1", "role": "Writer", "action": "Writing", "detail": "Changed value from 2 to 3", "active_readers": 0, "active_writer": true, "waiting_writers": 0, "shared_data": 3, "states": {"R2": "Waiting", "W0": "Finished writing", "R0": "Waiting", "R1": "Waiting", "W1": "Writing", "R3": "Waiting"}}, {"time": 1.2165, "actor": "W0", "role": "Writer", "action": "Waiting to write", "detail": "Round 2", "active_readers": 0, "active_writer": true, "waiting_writers": 1, "shared_data": 3, "states": {"R2": "Waiting", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Writing", "R3": "Waiting"}}, {"time": 1.2899, "actor": "W1", "role": "Writer", "action": "Writer finished", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 1, "shared_data": 3, "states": {"R2": "Waiting", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Finished writing", "R3": "Waiting"}}, {"time": 1.29, "actor": "W0", "role": "Writer", "action": "Writing", "detail": "Changed value from 3 to 4", "active_readers": 0, "active_writer": true, "waiting_writers": 0, "shared_data": 4, "states": {"R2": "Waiting", "W0": "Writing", "R0": "Waiting", "R1": "Waiting", "W1": "Finished writing", "R3": "Waiting"}}, {"time": 1.481, "actor": "W1", "role": "Writer", "action": "Waiting to write", "detail": "Round 3", "active_readers": 0, "active_writer": true, "waiting_writers": 1, "shared_data": 4, "states": {"R2": "Waiting", "W0": "Writing", "R0": "Waiting", "R1": "Waiting", "W1": "Waiting", "R3": "Waiting"}}, {"time": 1.6494, "actor": "W0", "role": "Writer", "action": "Writer finished", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 1, "shared_data": 4, "states": {"R2": "Waiting", "W0": "Finished writing", "R0": "Waiting", "R1": "Waiting", "W1": "Waiting", "R3": "Waiting"}}, {"time": 1.6498, "actor": "W1", "role": "Writer", "action": "Writing", "detail": "Changed value from 4 to 5", "active_readers": 0, "active_writer": true, "waiting_writers": 0, "shared_data": 5, "states": {"R2": "Waiting", "W0": "Finished writing", "R0": "Waiting", "R1": "Waiting", "W1": "Writing", "R3": "Waiting"}}, {"time": 1.8427, "actor": "W0", "role": "Writer", "action": "Waiting to write", "detail": "Round 3", "active_readers": 0, "active_writer": true, "waiting_writers": 1, "shared_data": 5, "states": {"R2": "Waiting", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Writing", "R3": "Waiting"}}, {"time": 1.9781, "actor": "W1", "role": "Writer", "action": "Writer finished", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 1, "shared_data": 5, "states": {"R2": "Waiting", "W0": "Waiting", "R0": "Waiting", "R1": "Waiting", "W1": "Finished writing", "R3": "Waiting"}}, {"time": 1.9782, "actor": "W0", "role": "Writer", "action": "Writing", "detail": "Changed value from 5 to 6", "active_readers": 0, "active_writer": true, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Waiting", "W0": "Writing", "R0": "Waiting", "R1": "Waiting", "W1": "Finished writing", "R3": "Waiting"}}, {"time": 2.1059, "actor": "W1", "role": "Writer", "action": "Completed", "detail": "All rounds finished", "active_readers": 0, "active_writer": true, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Waiting", "W0": "Writing", "R0": "Waiting", "R1": "Waiting", "W1": "Completed", "R3": "Waiting"}}, {"time": 2.303, "actor": "W0", "role": "Writer", "action": "Writer finished", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Waiting", "W0": "Finished writing", "R0": "Waiting", "R1": "Waiting", "W1": "Completed", "R3": "Waiting"}}, {"time": 2.3031, "actor": "R0", "role": "Reader", "action": "Started reading", "detail": "Round 1", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Waiting", "W0": "Finished writing", "R0": "Reading", "R1": "Waiting", "W1": "Completed", "R3": "Waiting"}}, {"time": 2.3032, "actor": "R2", "role": "Reader", "action": "Started reading", "detail": "Round 2", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Finished writing", "R0": "Reading", "R1": "Waiting", "W1": "Completed", "R3": "Waiting"}}, {"time": 2.3032, "actor": "R1", "role": "Reader", "action": "Started reading", "detail": "Round 1", "active_readers": 3, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Finished writing", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Waiting"}}, {"time": 2.3032, "actor": "R3", "role": "Reader", "action": "Started reading", "detail": "Round 1", "active_readers": 4, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Finished writing", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 2.4204, "actor": "W0", "role": "Writer", "action": "Completed", "detail": "All rounds finished", "active_readers": 4, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 2.4298, "actor": "R3", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 4, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 2.4298, "actor": "R3", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 3, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.4308, "actor": "R0", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 3, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.4308, "actor": "R0", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.4552, "actor": "R1", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.4552, "actor": "R1", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Finished reading", "R1": "Finished reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.47, "actor": "R2", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Finished reading", "R1": "Finished reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.4701, "actor": "R2", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Finished reading", "W0": "Completed", "R0": "Finished reading", "R1": "Finished reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.5935, "actor": "R1", "role": "Reader", "action": "Waiting to read", "detail": "Round 2", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Finished reading", "W0": "Completed", "R0": "Finished reading", "R1": "Waiting", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.5936, "actor": "R1", "role": "Reader", "action": "Started reading", "detail": "Round 2", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Finished reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.6003, "actor": "R2", "role": "Reader", "action": "Waiting to read", "detail": "Round 3", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Waiting", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.6003, "actor": "R2", "role": "Reader", "action": "Started reading", "detail": "Round 3", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.6024, "actor": "R0", "role": "Reader", "action": "Waiting to read", "detail": "Round 2", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Waiting", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.6024, "actor": "R0", "role": "Reader", "action": "Started reading", "detail": "Round 2", "active_readers": 3, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.6051, "actor": "R3", "role": "Reader", "action": "Waiting to read", "detail": "Round 2", "active_readers": 3, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Waiting"}}, {"time": 2.6051, "actor": "R3", "role": "Reader", "action": "Started reading", "detail": "Round 2", "active_readers": 4, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 2.7278, "actor": "R0", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 4, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 2.7278, "actor": "R0", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 3, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 2.7288, "actor": "R2", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 3, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 2.7288, "actor": "R2", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Finished reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 2.8058, "actor": "R3", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Finished reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 2.8058, "actor": "R3", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Finished reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.8485, "actor": "R1", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Finished reading", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.8486, "actor": "R1", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Finished reading", "W0": "Completed", "R0": "Finished reading", "R1": "Finished reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.8563, "actor": "R2", "role": "Reader", "action": "Completed", "detail": "All rounds finished", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Finished reading", "R1": "Finished reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.9123, "actor": "R0", "role": "Reader", "action": "Waiting to read", "detail": "Round 3", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Waiting", "R1": "Finished reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.9123, "actor": "R0", "role": "Reader", "action": "Started reading", "detail": "Round 3", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Reading", "R1": "Finished reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.9736, "actor": "R1", "role": "Reader", "action": "Waiting to read", "detail": "Round 3", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Reading", "R1": "Waiting", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.9736, "actor": "R1", "role": "Reader", "action": "Started reading", "detail": "Round 3", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 2.9774, "actor": "R3", "role": "Reader", "action": "Waiting to read", "detail": "Round 3", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Waiting"}}, {"time": 2.9775, "actor": "R3", "role": "Reader", "action": "Started reading", "detail": "Round 3", "active_readers": 3, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 3.1018, "actor": "R0", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 3, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 3.1019, "actor": "R0", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 3.117, "actor": "R3", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 2, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Reading"}}, {"time": 3.117, "actor": "R3", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 3.2183, "actor": "R1", "role": "Reader", "action": "Finished reading", "detail": "Observed value 6", "active_readers": 1, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Finished reading", "R1": "Reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 3.2183, "actor": "R1", "role": "Reader", "action": "Left resource", "detail": "", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Finished reading", "R1": "Finished reading", "W1": "Completed", "R3": "Finished reading"}}, {"time": 3.2188, "actor": "R3", "role": "Reader", "action": "Completed", "detail": "All rounds finished", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Finished reading", "R1": "Finished reading", "W1": "Completed", "R3": "Completed"}}, {"time": 3.2633, "actor": "R0", "role": "Reader", "action": "Completed", "detail": "All rounds finished", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Completed", "R1": "Finished reading", "W1": "Completed", "R3": "Completed"}}, {"time": 3.3766, "actor": "R1", "role": "Reader", "action": "Completed", "detail": "All rounds finished", "active_readers": 0, "active_writer": false, "waiting_writers": 0, "shared_data": 6, "states": {"R2": "Completed", "W0": "Completed", "R0": "Completed", "R1": "Completed", "W1": "Completed", "R3": "Completed"}}];
+let index = 0;
+let timer = null;
+
+document.getElementById("total").textContent = events.length;
+document.getElementById("seek").max = Math.max(0, events.length - 1);
+
+function render() {
+    if (!events.length) return;
+    const e = events[index];
+    document.getElementById("seek").value = index;
+    document.getElementById("counter").textContent =
+        `Event ${index + 1} of ${events.length}`;
+    document.getElementById("actor").textContent = e.actor ?? "Unknown";
+    document.getElementById("action").textContent = e.action ?? "";
+    document.getElementById("detail").textContent = e.detail ?? "";
+    document.getElementById("readers").textContent = e.active_readers ?? 0;
+    document.getElementById("writer").textContent =
+        e.active_writer ? "Yes" : "No";
+    document.getElementById("waiting").textContent =
+        e.waiting_writers ?? 0;
+    document.getElementById("value").textContent = e.shared_data ?? 0;
+
+    const states = e.states ?? {};
+    document.getElementById("tracks").innerHTML =
+        Object.entries(states).map(([name, state]) => {
+            let cls = "";
+            if (/reading/i.test(state)) cls = "reading";
+            else if (/writing/i.test(state)) cls = "writing";
+            else if (/waiting/i.test(state)) cls = "waiting";
+            return `<div class="track"><div class="track-label">${name}</div>
+            <div class="bar ${cls}">${state}</div></div>`;
+        }).join("");
+
+    document.getElementById("status").textContent =
+        e.active_writer && (e.active_readers ?? 0) > 0
+        ? "WARNING: conflicting access recorded!"
+        : "Replay loaded from actual execution trace";
+
+    const start = Math.max(0, index - 7);
+    const rows = events.slice(start, index + 1).map((item, offset) => {
+        const n = start + offset;
+        return `<tr ${n === index ? 'style="font-weight:bold;background:#eef2ff"' : ""}>
+        <td>${n + 1}</td>
+        <td>${item.actor ?? ""}</td>
+        <td>${item.action ?? ""}</td>
+        <td>${item.active_readers ?? 0}</td>
+        <td>${item.active_writer ? "Yes" : "No"}</td>
+        <td>${item.shared_data ?? 0}</td></tr>`;
+    }).join("");
+    document.getElementById("log").innerHTML = rows;
+}
+
+function pause() {
+    if (timer !== null) clearTimeout(timer);
+    timer = null;
+}
+function next() {
+    pause();
+    if (index < events.length - 1) index++;
+    render();
+}
+function previous() {
+    pause();
+    if (index > 0) index--;
+    render();
+}
+function play() {
+    pause();
+    function tick() {
+        if (index >= events.length - 1) {
+            timer = null;
+            return;
+        }
+        index++;
+        render();
+        timer = setTimeout(tick,
+            Number(document.getElementById("speed").value));
+    }
+    timer = setTimeout(tick,
+        Number(document.getElementById("speed").value));
+}
+document.getElementById("seek").addEventListener("input", event => {
+    pause();
+    index = Number(event.target.value);
+    render();
+});
+render();
+</script>
+</body>
+</html>

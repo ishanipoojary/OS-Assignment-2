@@ -1,0 +1,2018 @@
+[
+  {
+    "time": 0.0003,
+    "philosopher": 0,
+    "action": "Thinking",
+    "detail": "Round 1",
+    "states": [
+      "Thinking",
+      "Thinking",
+      "Thinking",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.0005,
+    "philosopher": 1,
+    "action": "Thinking",
+    "detail": "Round 1",
+    "states": [
+      "Thinking",
+      "Thinking",
+      "Thinking",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.0007,
+    "philosopher": 2,
+    "action": "Thinking",
+    "detail": "Round 1",
+    "states": [
+      "Thinking",
+      "Thinking",
+      "Thinking",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.001,
+    "philosopher": 3,
+    "action": "Thinking",
+    "detail": "Round 1",
+    "states": [
+      "Thinking",
+      "Thinking",
+      "Thinking",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.158,
+    "philosopher": 0,
+    "action": "Hungry",
+    "detail": "Round 1",
+    "states": [
+      "Hungry",
+      "Thinking",
+      "Thinking",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.1581,
+    "philosopher": 0,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Waiting for chopsticks",
+      "Thinking",
+      "Thinking",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.1581,
+    "philosopher": 0,
+    "action": "Acquired chopstick",
+    "detail": "C0",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Thinking",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.1581,
+    "philosopher": 0,
+    "action": "Acquired chopstick",
+    "detail": "C1",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Thinking",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.1581,
+    "philosopher": 0,
+    "action": "Eating",
+    "detail": "Round 1",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Thinking",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.2556,
+    "philosopher": 2,
+    "action": "Hungry",
+    "detail": "Round 1",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Hungry",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.2556,
+    "philosopher": 2,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.2556,
+    "philosopher": 2,
+    "action": "Acquired chopstick",
+    "detail": "C2",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      null
+    ]
+  },
+  {
+    "time": 0.2556,
+    "philosopher": 2,
+    "action": "Acquired chopstick",
+    "detail": "C3",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 0.2556,
+    "philosopher": 2,
+    "action": "Eating",
+    "detail": "Round 1",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Eating",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 0.2884,
+    "philosopher": 1,
+    "action": "Hungry",
+    "detail": "Round 1",
+    "states": [
+      "Eating",
+      "Hungry",
+      "Eating",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 0.2884,
+    "philosopher": 1,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 0.2958,
+    "philosopher": 3,
+    "action": "Hungry",
+    "detail": "Round 1",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 0.5668,
+    "philosopher": 2,
+    "action": "Released chopstick",
+    "detail": "C3",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      null
+    ]
+  },
+  {
+    "time": 0.5669,
+    "philosopher": 2,
+    "action": "Released chopstick",
+    "detail": "C2",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.5669,
+    "philosopher": 2,
+    "action": "Finished round",
+    "detail": "1",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.5669,
+    "philosopher": 2,
+    "action": "Thinking",
+    "detail": "Round 2",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.5669,
+    "philosopher": 3,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.5669,
+    "philosopher": 3,
+    "action": "Acquired chopstick",
+    "detail": "C3",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 0.6149,
+    "philosopher": 0,
+    "action": "Released chopstick",
+    "detail": "C1",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 0.6149,
+    "philosopher": 0,
+    "action": "Released chopstick",
+    "detail": "C0",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 0.6149,
+    "philosopher": 0,
+    "action": "Finished round",
+    "detail": "1",
+    "states": [
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 0.6149,
+    "philosopher": 0,
+    "action": "Thinking",
+    "detail": "Round 2",
+    "states": [
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 0.615,
+    "philosopher": 1,
+    "action": "Acquired chopstick",
+    "detail": "C1",
+    "states": [
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 0.615,
+    "philosopher": 1,
+    "action": "Acquired chopstick",
+    "detail": "C2",
+    "states": [
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 0.615,
+    "philosopher": 1,
+    "action": "Eating",
+    "detail": "Round 1",
+    "states": [
+      "Thinking",
+      "Eating",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 0.615,
+    "philosopher": 3,
+    "action": "Acquired chopstick",
+    "detail": "C0",
+    "states": [
+      "Thinking",
+      "Eating",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 0.615,
+    "philosopher": 3,
+    "action": "Eating",
+    "detail": "Round 1",
+    "states": [
+      "Thinking",
+      "Eating",
+      "Thinking",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 0.7633,
+    "philosopher": 2,
+    "action": "Hungry",
+    "detail": "Round 2",
+    "states": [
+      "Thinking",
+      "Eating",
+      "Hungry",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 0.7633,
+    "philosopher": 2,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Thinking",
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 0.801,
+    "philosopher": 0,
+    "action": "Hungry",
+    "detail": "Round 2",
+    "states": [
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 0.8223,
+    "philosopher": 3,
+    "action": "Released chopstick",
+    "detail": "C0",
+    "states": [
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 0.8223,
+    "philosopher": 3,
+    "action": "Released chopstick",
+    "detail": "C3",
+    "states": [
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 0.8223,
+    "philosopher": 3,
+    "action": "Finished round",
+    "detail": "1",
+    "states": [
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 0.8224,
+    "philosopher": 3,
+    "action": "Thinking",
+    "detail": "Round 2",
+    "states": [
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 0.8224,
+    "philosopher": 0,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Waiting for chopsticks",
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 0.8224,
+    "philosopher": 0,
+    "action": "Acquired chopstick",
+    "detail": "C0",
+    "states": [
+      "Acquiring chopsticks",
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 0.905,
+    "philosopher": 1,
+    "action": "Released chopstick",
+    "detail": "C2",
+    "states": [
+      "Acquiring chopsticks",
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      1,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.9051,
+    "philosopher": 1,
+    "action": "Released chopstick",
+    "detail": "C1",
+    "states": [
+      "Acquiring chopsticks",
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.9051,
+    "philosopher": 1,
+    "action": "Finished round",
+    "detail": "1",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.9051,
+    "philosopher": 1,
+    "action": "Thinking",
+    "detail": "Round 2",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.9053,
+    "philosopher": 0,
+    "action": "Acquired chopstick",
+    "detail": "C1",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.9053,
+    "philosopher": 0,
+    "action": "Eating",
+    "detail": "Round 2",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 0.9053,
+    "philosopher": 2,
+    "action": "Acquired chopstick",
+    "detail": "C2",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      null
+    ]
+  },
+  {
+    "time": 0.9054,
+    "philosopher": 2,
+    "action": "Acquired chopstick",
+    "detail": "C3",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 0.9054,
+    "philosopher": 2,
+    "action": "Eating",
+    "detail": "Round 2",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Eating",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.0787,
+    "philosopher": 1,
+    "action": "Hungry",
+    "detail": "Round 2",
+    "states": [
+      "Eating",
+      "Hungry",
+      "Eating",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.0787,
+    "philosopher": 1,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.0998,
+    "philosopher": 3,
+    "action": "Hungry",
+    "detail": "Round 2",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.2843,
+    "philosopher": 2,
+    "action": "Released chopstick",
+    "detail": "C3",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      null
+    ]
+  },
+  {
+    "time": 1.2843,
+    "philosopher": 2,
+    "action": "Released chopstick",
+    "detail": "C2",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 1.2843,
+    "philosopher": 2,
+    "action": "Finished round",
+    "detail": "2",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 1.2843,
+    "philosopher": 2,
+    "action": "Thinking",
+    "detail": "Round 3",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 1.2844,
+    "philosopher": 3,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 1.2844,
+    "philosopher": 3,
+    "action": "Acquired chopstick",
+    "detail": "C3",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 1.3375,
+    "philosopher": 0,
+    "action": "Released chopstick",
+    "detail": "C1",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 1.3375,
+    "philosopher": 0,
+    "action": "Released chopstick",
+    "detail": "C0",
+    "states": [
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 1.3375,
+    "philosopher": 0,
+    "action": "Finished round",
+    "detail": "2",
+    "states": [
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 1.3375,
+    "philosopher": 0,
+    "action": "Thinking",
+    "detail": "Round 3",
+    "states": [
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 1.3376,
+    "philosopher": 1,
+    "action": "Acquired chopstick",
+    "detail": "C1",
+    "states": [
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 1.3376,
+    "philosopher": 1,
+    "action": "Acquired chopstick",
+    "detail": "C2",
+    "states": [
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 1.3376,
+    "philosopher": 1,
+    "action": "Eating",
+    "detail": "Round 2",
+    "states": [
+      "Thinking",
+      "Eating",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 1.3376,
+    "philosopher": 3,
+    "action": "Acquired chopstick",
+    "detail": "C0",
+    "states": [
+      "Thinking",
+      "Eating",
+      "Thinking",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 1.3377,
+    "philosopher": 3,
+    "action": "Eating",
+    "detail": "Round 2",
+    "states": [
+      "Thinking",
+      "Eating",
+      "Thinking",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 1.4664,
+    "philosopher": 0,
+    "action": "Hungry",
+    "detail": "Round 3",
+    "states": [
+      "Hungry",
+      "Eating",
+      "Thinking",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 1.4664,
+    "philosopher": 0,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Waiting for chopsticks",
+      "Eating",
+      "Thinking",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 1.4941,
+    "philosopher": 2,
+    "action": "Hungry",
+    "detail": "Round 3",
+    "states": [
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 1.5926,
+    "philosopher": 3,
+    "action": "Released chopstick",
+    "detail": "C0",
+    "states": [
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 1.5926,
+    "philosopher": 3,
+    "action": "Released chopstick",
+    "detail": "C3",
+    "states": [
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 1.5926,
+    "philosopher": 3,
+    "action": "Finished round",
+    "detail": "2",
+    "states": [
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 1.5926,
+    "philosopher": 3,
+    "action": "Thinking",
+    "detail": "Round 3",
+    "states": [
+      "Waiting for chopsticks",
+      "Eating",
+      "Hungry",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 1.5927,
+    "philosopher": 0,
+    "action": "Acquired chopstick",
+    "detail": "C0",
+    "states": [
+      "Acquiring chopsticks",
+      "Eating",
+      "Hungry",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 1.5927,
+    "philosopher": 2,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Acquiring chopsticks",
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      1,
+      1,
+      null
+    ]
+  },
+  {
+    "time": 1.6502,
+    "philosopher": 1,
+    "action": "Released chopstick",
+    "detail": "C2",
+    "states": [
+      "Acquiring chopsticks",
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      1,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 1.6503,
+    "philosopher": 1,
+    "action": "Released chopstick",
+    "detail": "C1",
+    "states": [
+      "Acquiring chopsticks",
+      "Eating",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 1.6503,
+    "philosopher": 1,
+    "action": "Finished round",
+    "detail": "2",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 1.6503,
+    "philosopher": 1,
+    "action": "Thinking",
+    "detail": "Round 3",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Waiting for chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 1.6503,
+    "philosopher": 2,
+    "action": "Acquired chopstick",
+    "detail": "C2",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      2,
+      null
+    ]
+  },
+  {
+    "time": 1.6504,
+    "philosopher": 2,
+    "action": "Acquired chopstick",
+    "detail": "C3",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Acquiring chopsticks",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.6504,
+    "philosopher": 2,
+    "action": "Eating",
+    "detail": "Round 3",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Eating",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.6504,
+    "philosopher": 0,
+    "action": "Acquired chopstick",
+    "detail": "C1",
+    "states": [
+      "Acquiring chopsticks",
+      "Thinking",
+      "Eating",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.6504,
+    "philosopher": 0,
+    "action": "Eating",
+    "detail": "Round 3",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Eating",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.8662,
+    "philosopher": 3,
+    "action": "Hungry",
+    "detail": "Round 3",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Eating",
+      "Hungry"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.8662,
+    "philosopher": 3,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Eating",
+      "Thinking",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 1.8995,
+    "philosopher": 1,
+    "action": "Hungry",
+    "detail": "Round 3",
+    "states": [
+      "Eating",
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 2.0556,
+    "philosopher": 0,
+    "action": "Released chopstick",
+    "detail": "C1",
+    "states": [
+      "Eating",
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      0,
+      null,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 2.0556,
+    "philosopher": 0,
+    "action": "Released chopstick",
+    "detail": "C0",
+    "states": [
+      "Eating",
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 2.0556,
+    "philosopher": 0,
+    "action": "Finished round",
+    "detail": "3",
+    "states": [
+      "Thinking",
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 2.0556,
+    "philosopher": 0,
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "states": [
+      "Finished",
+      "Hungry",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 2.0557,
+    "philosopher": 1,
+    "action": "Entered room",
+    "detail": "Permit acquired",
+    "states": [
+      "Finished",
+      "Waiting for chopsticks",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 2.0557,
+    "philosopher": 1,
+    "action": "Acquired chopstick",
+    "detail": "C1",
+    "states": [
+      "Finished",
+      "Acquiring chopsticks",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      2,
+      2
+    ]
+  },
+  {
+    "time": 2.061,
+    "philosopher": 2,
+    "action": "Released chopstick",
+    "detail": "C3",
+    "states": [
+      "Finished",
+      "Acquiring chopsticks",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      2,
+      null
+    ]
+  },
+  {
+    "time": 2.0612,
+    "philosopher": 2,
+    "action": "Released chopstick",
+    "detail": "C2",
+    "states": [
+      "Finished",
+      "Acquiring chopsticks",
+      "Eating",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 2.0612,
+    "philosopher": 2,
+    "action": "Finished round",
+    "detail": "3",
+    "states": [
+      "Finished",
+      "Acquiring chopsticks",
+      "Thinking",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 2.0612,
+    "philosopher": 2,
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "states": [
+      "Finished",
+      "Acquiring chopsticks",
+      "Finished",
+      "Waiting for chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 2.0613,
+    "philosopher": 3,
+    "action": "Acquired chopstick",
+    "detail": "C3",
+    "states": [
+      "Finished",
+      "Acquiring chopsticks",
+      "Finished",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      null,
+      1,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 2.0613,
+    "philosopher": 3,
+    "action": "Acquired chopstick",
+    "detail": "C0",
+    "states": [
+      "Finished",
+      "Acquiring chopsticks",
+      "Finished",
+      "Acquiring chopsticks"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 2.0613,
+    "philosopher": 3,
+    "action": "Eating",
+    "detail": "Round 3",
+    "states": [
+      "Finished",
+      "Acquiring chopsticks",
+      "Finished",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 2.0613,
+    "philosopher": 1,
+    "action": "Acquired chopstick",
+    "detail": "C2",
+    "states": [
+      "Finished",
+      "Acquiring chopsticks",
+      "Finished",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 2.0613,
+    "philosopher": 1,
+    "action": "Eating",
+    "detail": "Round 3",
+    "states": [
+      "Finished",
+      "Eating",
+      "Finished",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "time": 2.354,
+    "philosopher": 1,
+    "action": "Released chopstick",
+    "detail": "C2",
+    "states": [
+      "Finished",
+      "Eating",
+      "Finished",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      1,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 2.3541,
+    "philosopher": 1,
+    "action": "Released chopstick",
+    "detail": "C1",
+    "states": [
+      "Finished",
+      "Eating",
+      "Finished",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 2.3541,
+    "philosopher": 1,
+    "action": "Finished round",
+    "detail": "3",
+    "states": [
+      "Finished",
+      "Thinking",
+      "Finished",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 2.3541,
+    "philosopher": 1,
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "states": [
+      "Finished",
+      "Finished",
+      "Finished",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      3,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 2.5465,
+    "philosopher": 3,
+    "action": "Released chopstick",
+    "detail": "C0",
+    "states": [
+      "Finished",
+      "Finished",
+      "Finished",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      3
+    ]
+  },
+  {
+    "time": 2.5465,
+    "philosopher": 3,
+    "action": "Released chopstick",
+    "detail": "C3",
+    "states": [
+      "Finished",
+      "Finished",
+      "Finished",
+      "Eating"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 2.5465,
+    "philosopher": 3,
+    "action": "Finished round",
+    "detail": "3",
+    "states": [
+      "Finished",
+      "Finished",
+      "Finished",
+      "Thinking"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "time": 2.5465,
+    "philosopher": 3,
+    "action": "Completed",
+    "detail": "All rounds finished",
+    "states": [
+      "Finished",
+      "Finished",
+      "Finished",
+      "Finished"
+    ],
+    "chopstick_owners": [
+      null,
+      null,
+      null,
+      null
+    ]
+  }
+]
