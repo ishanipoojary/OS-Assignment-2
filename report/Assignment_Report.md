@@ -193,25 +193,25 @@ The following screenshots show the browser-based simulations generated from the 
 
 The screenshot shows the Dining Philosophers simulation using semaphores.
 
-![Dining Philosophers Semaphore Simulation](../screenshots/01_dining_philosophers_semaphore.png)
+<img src="../screenshots/01_dining_philosophers_semaphore.png" alt="Dining Philosophers Semaphore Simulation" width="500">
 
 ### 12.2 Dining Philosophers Using Monitors
 
 The screenshot shows the Dining Philosophers simulation using monitor-style synchronization.
 
-![Dining Philosophers Monitor Simulation](../screenshots/02_dining_philosophers_monitor.png)
+<img src="../screenshots/02_dining_philosophers_monitor.png" alt="Dining Philosophers Monitor Simulation" width="500">
 
 ### 12.3 Readers-Writers Using Semaphores
 
 The screenshot shows the Readers-Writers simulation using semaphores.
 
-![Readers-Writers Semaphore Simulation](../screenshots/03_readers_writers_semaphore.png)
+<img src="../screenshots/03_readers_writers_semaphore.png" alt="Readers-Writers Semaphore Simulation" width="500">
 
 ### 12.4 Readers-Writers Using Monitors
 
 The screenshot shows the Readers-Writers simulation using monitor-style synchronization.
 
-![Readers-Writers Monitor Simulation](../screenshots/04_readers_writers_monitor.png)
+<img src="../screenshots/04_readers_writers_monitor.png" alt="Readers-Writers Monitor Simulation" width="500">
 
 ## 13. References
 
@@ -230,5 +230,3 @@ The screenshot shows the Readers-Writers simulation using monitor-style synchron
 7. MDN Web Docs. *JavaScript*. https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 8. OpenAI. *ChatGPT*. https://chatgpt.com/
-
-**Note:** These references should be retained only where they match the material actually consulted or used during development.
